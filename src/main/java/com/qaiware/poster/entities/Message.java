@@ -1,12 +1,21 @@
 package com.qaiware.poster.entities;
 
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "messages")
 public class Message {
@@ -22,32 +31,11 @@ public class Message {
   @Column(name = "type")
   private String type;
 
+  @Column(name = "created_at")
+  private LocalDateTime createdAt;
+
   public Message(String payload, String type) {
     this.payload = payload;
-    this.type = type;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getPayload() {
-    return payload;
-  }
-
-  public void setPayload(String payload) {
-    this.payload = payload;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
     this.type = type;
   }
 }
