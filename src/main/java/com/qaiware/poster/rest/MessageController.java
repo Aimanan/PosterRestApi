@@ -5,6 +5,7 @@ import com.qaiware.poster.models.MessageModel;
 import com.qaiware.poster.services.MessageService;
 import com.qaiware.poster.services.MessageValidator;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,11 +27,12 @@ public class MessageController {
   }
 
   @PostMapping("/{type}")
-  public void sendMessage(
+  public ResponseEntity sendMessage(
       @RequestBody final MessageModel message,
       @PathVariable final String type) {
     try {
       messageValidator.manageMessage(type, message);
+      return new ResponseEntity(HttpStatus.CREATED);
     } catch (BusinessRuleException ex) {
       throw new ResponseStatusException(
           HttpStatus.PRECONDITION_FAILED, "Message validation failed:", ex);
