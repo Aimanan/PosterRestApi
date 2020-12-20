@@ -23,7 +23,7 @@ public class MessageConvertor {
 
     res.setPayload(message.getPayload());
 
-    res.setType(message.getType());
+    res.setType(message.getType().toString());
 
     return res;
   }

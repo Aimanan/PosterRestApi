@@ -1,5 +1,6 @@
 package com.qaiware.poster.entities;
 
+import com.qaiware.poster.models.Type;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,12 +30,12 @@ public class Message {
   private String payload;
 
   @Column(name = "type")
-  private String type;
+  private Type type;
 
   @Column(name = "created_at")
   private LocalDateTime createdAt;
 
-  public Message(String payload, String type) {
+  public Message(String payload, Type type) {
     this.payload = payload;
     this.type = type;
   }

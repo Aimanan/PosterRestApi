@@ -2,8 +2,8 @@ package com.qaiware.poster.services.impl;
 
 import static com.qaiware.poster.errors.BusinessRuleException.isValid;
 
-import com.qaiware.poster.errors.BusinessRuleException;
 import com.qaiware.poster.models.MessageModel;
+import com.qaiware.poster.models.Type;
 import com.qaiware.poster.services.MessageService;
 import com.qaiware.poster.services.MessageValidator;
 import org.springframework.stereotype.Service;
@@ -18,19 +18,20 @@ public class MessageValidatorImpl implements MessageValidator {
   }
 
   @Override
-  public void manageMessageType(final String type, final MessageModel messageModel) {
+  public void manageMessage(final String type, final MessageModel messageModel) {
     String payload = messageModel.getPayload();
 
-    if (type == "send_text") {
-      validateTextMessage(payload);
-      messageService.postText(payload, type);
+    Type messageType = Type.valueOf(type.toUpperCase());
 
-    } else if (type == "send_emotion") {
+    if (messageType.equals(Type.SEND_TEXT)) {
+      validateTextMessage(payload);
+      messageService.postMessage(payload, messageType);
+    }
+
+    if (messageType.equals(Type.SEND_TEXT)) {
       validateEmotionMessage(payload);
-      messageService.postText(payload, type);
-      //TODO emotion
-    } else
-      throw new BusinessRuleException("Unsupported message type", type);
+      messageService.postMessage(payload, messageType);
+    }
   }
 
   private void validateTextMessage(final String payload) {

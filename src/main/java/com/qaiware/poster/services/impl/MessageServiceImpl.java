@@ -3,6 +3,7 @@ package com.qaiware.poster.services.impl;
 import com.qaiware.poster.entities.Message;
 import com.qaiware.poster.entities.convertors.MessageConvertor;
 import com.qaiware.poster.models.MessageModel;
+import com.qaiware.poster.models.Type;
 import com.qaiware.poster.repository.MessageRepository;
 import com.qaiware.poster.services.MessageService;
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class MessageServiceImpl implements MessageService {
   }
 
   @Override
-  public MessageModel postText(final String payload, String type) {
+  public MessageModel postMessage(final String payload, Type type) {
 
     Message messageEntity = new Message(
         payload,
