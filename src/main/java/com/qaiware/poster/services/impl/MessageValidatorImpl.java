@@ -3,7 +3,7 @@ package com.qaiware.poster.services.impl;
 import static com.qaiware.poster.errors.BusinessRuleException.isValid;
 
 import com.qaiware.poster.models.MessageModel;
-import com.qaiware.poster.models.Type;
+import com.qaiware.poster.entities.Type;
 import com.qaiware.poster.services.MessageService;
 import com.qaiware.poster.services.MessageValidator;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class MessageValidatorImpl implements MessageValidator {
       messageService.postMessage(payload, messageType);
     }
 
-    if (messageType.equals(Type.SEND_TEXT)) {
+    if (messageType.equals(Type.SEND_EMOTION)) {
       validateEmotionMessage(payload);
       messageService.postMessage(payload, messageType);
     }

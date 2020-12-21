@@ -1,4 +1,4 @@
-package com.qaiware.poster.entities.convertors;
+package com.qaiware.poster.entities.converters;
 
 import com.qaiware.poster.entities.Message;
 import com.qaiware.poster.models.MessageModel;
@@ -6,11 +6,11 @@ import com.qaiware.poster.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MessageConvertor {
+public class MessageConverter {
 
   private final MessageRepository messageRepository;
 
-  public MessageConvertor(MessageRepository messageRepository) {
+  public MessageConverter(MessageRepository messageRepository) {
     this.messageRepository = messageRepository;
   }
 

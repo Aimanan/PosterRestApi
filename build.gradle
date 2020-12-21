@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 	id "io.freefair.lombok" version "5.3.0"
+	id 'org.liquibase.gradle' version '2.0.3'
 }
 
 group = 'com.qaiware'
@@ -11,6 +12,7 @@ sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {
@@ -20,8 +22,39 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	liquibaseRuntime 'org.liquibase:liquibase-core:3.8.1'
+	liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:2.1.1'
+	liquibaseRuntime 'mysql:mysql-connector-java:5.1.34'
+	testCompile 'junit:junit:4.12'
+	compile 'junit:junit:4.12'
 }
 
 test {
 	useJUnitPlatform()
 }
+
+liquibase {
+	activities {
+		main {
+			changeLogFile 'src/main/java/com/qaiware/poster/db/changelogs.xml'
+			url 'jdbc:postgresql://dbpostgresql:5432/mydb'
+			username 'postgres'
+			password 'password'
+		}
+	}
+}
+//
+//task dev {
+//	println "executing dev"
+//
+//	liquibase {
+//		activities {
+//			main {
+//				changeLogFile 'src/main/java/com/qaiware/poster/db/changelogs.xml'
+//				url 'jdbc:postgresql://dbpostgresql:5432/mydb'
+//				username 'postgres'
+//				password 'password'
+//			}
+//		}
+//	}
+//}

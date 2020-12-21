@@ -1,4 +1,4 @@
-package com.qaiware.poster.models;
+package com.qaiware.poster.entities;
 
 public enum Type {
   SEND_TEXT,

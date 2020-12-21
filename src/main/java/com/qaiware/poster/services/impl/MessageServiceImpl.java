@@ -1,12 +1,11 @@
 package com.qaiware.poster.services.impl;
 
 import com.qaiware.poster.entities.Message;
-import com.qaiware.poster.entities.convertors.MessageConvertor;
+import com.qaiware.poster.entities.converters.MessageConverter;
 import com.qaiware.poster.models.MessageModel;
-import com.qaiware.poster.models.Type;
+import com.qaiware.poster.entities.Type;
 import com.qaiware.poster.repository.MessageRepository;
 import com.qaiware.poster.services.MessageService;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +14,12 @@ public class MessageServiceImpl implements MessageService {
 
   private final MessageRepository messageRepository;
 
-  private final MessageConvertor messageConvertor;
+  private final MessageConverter messageConverter;
 
   public MessageServiceImpl(MessageRepository messageRepository,
-      MessageConvertor messageConvertor) {
+      MessageConverter messageConverter) {
     this.messageRepository = messageRepository;
-    this.messageConvertor = messageConvertor;
+    this.messageConverter = messageConverter;
   }
 
   @Override
@@ -35,7 +34,7 @@ public class MessageServiceImpl implements MessageService {
 
     Message message = messageRepository.save(messageEntity);
 
-    final MessageModel messageModel = messageConvertor.convertToModel(message);
+    final MessageModel messageModel = messageConverter.convertToModel(message);
 
     return messageModel;
   }

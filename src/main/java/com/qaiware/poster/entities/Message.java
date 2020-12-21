@@ -1,14 +1,14 @@
 package com.qaiware.poster.entities;
 
-import com.qaiware.poster.models.Type;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,6 +30,7 @@ public class Message {
   private String payload;
 
   @Column(name = "type")
+  @Enumerated(EnumType.STRING)
   private Type type;
 
   @Column(name = "created_at")
