@@ -3,7 +3,6 @@ package com.qaiware.poster.rest;
 import com.qaiware.poster.entities.Message;
 import com.qaiware.poster.errors.BusinessRuleException;
 import com.qaiware.poster.models.MessageModel;
-import com.qaiware.poster.models.UserModel;
 import com.qaiware.poster.repository.MessageRepository;
 import com.qaiware.poster.services.MessageService;
 import com.qaiware.poster.services.MessageValidator;
