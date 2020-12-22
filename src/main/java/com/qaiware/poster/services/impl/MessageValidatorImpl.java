@@ -2,8 +2,8 @@ package com.qaiware.poster.services.impl;
 
 import static com.qaiware.poster.errors.BusinessRuleException.isValid;
 
-import com.qaiware.poster.models.MessageModel;
 import com.qaiware.poster.entities.Type;
+import com.qaiware.poster.models.MessageModel;
 import com.qaiware.poster.services.MessageService;
 import com.qaiware.poster.services.MessageValidator;
 import org.springframework.stereotype.Service;
@@ -22,27 +22,32 @@ public class MessageValidatorImpl implements MessageValidator {
     String payload = messageModel.getPayload();
 
     Type messageType = Type.valueOf(type.toUpperCase());
+    messageModel.setType(type);
 
     if (messageType.equals(Type.SEND_TEXT)) {
       validateTextMessage(payload);
-      messageService.postMessage(payload, messageType);
+      messageService.postMessage(messageType, payload);
     }
 
     if (messageType.equals(Type.SEND_EMOTION)) {
       validateEmotionMessage(payload);
-      messageService.postMessage(payload, messageType);
+      messageService.postMessage(messageType, payload);
     }
   }
 
   private void validateTextMessage(final String payload) {
-    isValid(payload.length() > 0 && payload.length()<161,
+    isValid(payload != null && payload.length() > 0 && payload.length() < 161,
         "Payload length is not between 1 and 160",
         payload);
   }
 
   private void validateEmotionMessage(final String payload) {
-    isValid(payload.length() > 1 && payload.length()<11 && !payload.matches(".*\\d.*"),
-        "Payload length is not between 1 and 160",
+    isValid(payload != null && payload.length() > 1 && payload.length() < 11,
+        "Payload length is not between 1 and 11",
+        payload);
+
+    isValid(!payload.matches(".*\\d.*"),
+        "Payload contains digits",
         payload);
   }
 }

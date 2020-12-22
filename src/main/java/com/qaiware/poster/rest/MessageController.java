@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/messages")
@@ -40,8 +39,7 @@ public class MessageController {
       messageValidator.manageMessage(type, message);
       return new ResponseEntity(HttpStatus.CREATED);
     } catch (BusinessRuleException ex) {
-      throw new ResponseStatusException(
-          HttpStatus.PRECONDITION_FAILED, "Message validation failed:", ex);
+      return new ResponseEntity(HttpStatus.PRECONDITION_FAILED);
     }
   }
 

@@ -19,7 +19,7 @@ public class BusinessRuleException extends RuntimeException {
 
   /**
    * @param condition - if false will throw the BusinessRuleException
-   * @param message - message to use, could be with string formatting
+   * @param message   - message to use, could be with string formatting
    * @param arguments - to the string formatting from the message
    * @throws BusinessRuleException
    */

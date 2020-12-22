@@ -1,8 +1,9 @@
 package com.qaiware.poster.services;
 
-import com.qaiware.poster.models.MessageModel;
 import com.qaiware.poster.entities.Type;
+import com.qaiware.poster.models.MessageModel;
 
 public interface MessageService {
-  MessageModel postMessage(String payload, Type type);
+
+  MessageModel postMessage(Type type, String payload);
 }

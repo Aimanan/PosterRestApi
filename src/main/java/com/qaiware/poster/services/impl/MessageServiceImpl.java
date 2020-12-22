@@ -1,9 +1,9 @@
 package com.qaiware.poster.services.impl;
 
 import com.qaiware.poster.entities.Message;
+import com.qaiware.poster.entities.Type;
 import com.qaiware.poster.entities.converters.MessageConverter;
 import com.qaiware.poster.models.MessageModel;
-import com.qaiware.poster.entities.Type;
 import com.qaiware.poster.repository.MessageRepository;
 import com.qaiware.poster.services.MessageService;
 import java.time.LocalDateTime;
@@ -23,19 +23,13 @@ public class MessageServiceImpl implements MessageService {
   }
 
   @Override
-  public MessageModel postMessage(final String payload, Type type) {
+  public MessageModel postMessage(Type type, final String payload) {
 
-    Message messageEntity = new Message(
-        payload,
-        type
-    );
+    Message messageEntity = new Message(payload, type);
 
     messageEntity.setCreatedAt(LocalDateTime.now());
-
     Message message = messageRepository.save(messageEntity);
 
-    final MessageModel messageModel = messageConverter.convertToModel(message);
-
-    return messageModel;
+    return messageConverter.convertToModel(message);
   }
 }
