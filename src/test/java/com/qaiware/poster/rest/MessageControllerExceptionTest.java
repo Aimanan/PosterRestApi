@@ -3,7 +3,6 @@ package com.qaiware.poster.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -37,19 +36,33 @@ public class MessageControllerExceptionTest {
   public void setup() {
     MockitoAnnotations.initMocks(this);
 
-    doNothing()
+    doThrow(BusinessRuleException.class)
         .when(messageValidator)
         .manageMessage(Mockito.any(String.class), Mockito.any(MessageModel.class));
   }
 
   @Test
   public void sendMessage() {
-    ResponseEntity responseEntity = messageController.sendMessage(messageModel, "send_text");
+    messageController.sendMessage(messageModel, "send_text");
 
     verify(messageValidator, times(1)).manageMessage("send_text", messageModel);
+  }
+
+  @Test
+  public void sendMessageExceptionText() {
+    ResponseEntity responseEntity = messageController.sendMessage(messageModel, "send_text");
 
     Object body = responseEntity.getBody();
     assertNotNull(responseEntity);
-    assertEquals(responseEntity.getStatusCode(), HttpStatus.CREATED);
+    assertEquals(responseEntity.getStatusCode(), HttpStatus.PRECONDITION_FAILED);
+  }
+
+  @Test
+  public void sendMessageExceptionEmotion() {
+    ResponseEntity responseEntity = messageController.sendMessage(messageModel, "send_emotion");
+
+    Object body = responseEntity.getBody();
+    assertNotNull(responseEntity);
+    assertEquals(responseEntity.getStatusCode(), HttpStatus.PRECONDITION_FAILED);
   }
 }
