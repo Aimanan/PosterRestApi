@@ -1,5 +1,5 @@
 create table `messages` (
-	`id` long (20),
+	`id` bigint (20),
 	`payload` text,
 	`type` text,
 	`created_at` text,

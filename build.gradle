@@ -43,18 +43,5 @@ liquibase {
 		}
 	}
 }
-//
-//task dev {
-//	println "executing dev"
-//
-//	liquibase {
-//		activities {
-//			main {
-//				changeLogFile 'src/main/java/com/qaiware/poster/db/changelogs.xml'
-//				url 'jdbc:postgresql://dbpostgresql:5432/mydb'
-//				username 'postgres'
-//				password 'password'
-//			}
-//		}
-//	}
-//}
+
+apply plugin: 'org.liquibase.gradle'
